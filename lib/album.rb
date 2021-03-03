@@ -34,11 +34,26 @@ class Album
     @@albums[id]
   end
 
-  def update(name)
-    @name = name
+  def update(updates)
+    @name = updates[0]
+    @artist = updates[1]
+    @year = updates[2]
+    @genre = updates[3]
   end
 
   def delete
     @@albums.delete(self.id)
+  end
+
+  def self.search(search_str)
+    # search_results = @@albums.select { |id, album| album.name.downcase == search_str.downcase }
+    # search_results.values
+    result_array = []
+    @@albums.each do |id, album|
+      if album.name.downcase == search_str.downcase
+        result_array.push(album)
+      end
+    end
+    result_array
   end
 end

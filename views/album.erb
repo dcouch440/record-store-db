@@ -1,4 +1,4 @@
-<h4>Album Name: <%= @album.name %></h4>
+<h4><%= "#{@album.artist} - #{@album.name}" %></h4>
 
 <p><a href="/albums/<%= @album.id %>/edit">Edit album</a></p>
 <a href="/albums">Return to album list</a>

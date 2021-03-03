@@ -1,5 +1,6 @@
 require 'rspec'
 require 'album'
+require 'pry'
 
 describe '#Album' do
   before(:each) do
@@ -50,13 +51,13 @@ describe '#Album' do
       expect(Album.find(album.id)).to(eq(album))
     end
   end
-  
+
   describe('#update') do
     it("updates an album by id") do
-      album = Album.new("Let It Be", "The Beatles", "1970", "Rock", nil)
+      album = Album.new("Let It Be", "Beatles", "1970", "Rock", nil)
       album.save()
-      album.update("Let It Be... Naked")
-      expect(album.name).to(eq("Let It Be... Naked"))
+      album.update(["Let It Be... Naked", "The Beatles"])
+      expect("#{album.name}, #{album.artist}").to(eq("Let It Be... Naked, The Beatles"))
     end
   end
 
@@ -68,6 +69,17 @@ describe '#Album' do
       album2.save()
       album.delete()
       expect(Album.all).to(eq([album2]))
+    end
+  end
+
+  describe('.search') do
+    it("returns all albums with names matching a given search string") do
+      album = Album.new("Abbey Road", "The Beatles", "1969", "Rock", nil)
+      album.save()
+      album2 = Album.new("Help!", "The Beatles", "1965", "Rock", nil)
+      album2.save()
+      search_result = Album.search("Abbey road")
+      expect(search_result[0] == album).to(eq(true))
     end
   end
 end
