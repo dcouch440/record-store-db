@@ -1,24 +1,26 @@
 class Album
   attr_reader :id #Our new save method will need reader methods.
-  attr_accessor :name, :artist, :year, :genre
+  attr_accessor :name
 
-  @@albums = {}
-  @@total_rows = 0 # We've added a class variable to keep track of total rows and increment the value when an Album is added.
-
-  def initialize(name, artist, year, genre, id) # We've added id as a second parameter.
-    @name = name
-    @artist = artist
-    @year = year
-    @genre = genre
-    @id = id || @@total_rows += 1  # We've added code to handle the id.
+  def initialize(attributes) # We've added id as a second parameter.
+    @name = attributes.fetch(:name)
+    @id = attributes.fetch(:id)  # We've added code to handle the id.
   end
 
   def self.all
-    @@albums.values()
+    returned_albums = DB.exec("SELECT * FROM albums;")
+    albums = []
+    returned_albums.each() do |album|
+      name = album.fetch("name")
+      id = album.fetch("id").to_i
+      albums.push(Album.new({:name => name, :id => id}))
+    end
+    albums
   end
 
   def save
-    @@albums[self.id] = Album.new(self.name, self.artist, self.year, self.genre, self.id)
+    result = DB.exec("INSERT INTO albums (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch("id").to_i
   end
 
   def ==(album_to_compare)
@@ -26,34 +28,28 @@ class Album
   end
 
   def self.clear
-    @@albums = {}
-    @@total_rows = 0
+    DB.exec("DELETE FROM albums *;")
   end
 
   def self.find(id)
-    @@albums[id]
+    album = DB.exec("SELECT * FROM albums WHERE id = #{id};").first
+    name = album.fetch("name")
+    id = album.fetch("id").to_i
+    Album.new({:name => name, :id => id})
   end
 
-  def update(updates)
-    @name = updates[0]
-    @artist = updates[1]
-    @year = updates[2]
-    @genre = updates[3]
+  def update(name)
+    @name = name
+    DB.exec("UPDATE albums SET name = '#{@name}' WHERE id = #{@id};")
   end
 
   def delete
-    @@albums.delete(self.id)
+    DB.exec("DELETE FROM albums WHERE id = #{@id};")
+    DB.exec("DELETE FROM songs WHERE album_id = #{@id};") # new code
   end
 
-  def self.search(search_str)
-    # search_results = @@albums.select { |id, album| album.name.downcase == search_str.downcase }
-    # search_results.values
-    result_array = []
-    @@albums.each do |id, album|
-      if album.name.downcase == search_str.downcase
-        result_array.push(album)
-      end
-    end
-    result_array
+  def songs
+    Song.find_by_album(self.id)
   end
+
 end
