@@ -52,4 +52,7 @@ class Album
     Song.find_by_album(self.id)
   end
 
+  def sort
+    result = DB.exec("SELECT * FROM albums ORDER BY name")
+  end
 end
