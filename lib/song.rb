@@ -29,7 +29,7 @@ class Song
   end
 
   def save
-    result = DB.exec("INSERT INTO songs (name, album_id) VALUES ('#{@name}', #{@album_id}) RETURNING id;")
+    result = DB.exec("INSERT INTO songs (name, album_id) VALUES ('#{@name.gsub("'", "''")}', #{@album_id}) RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
 
@@ -48,7 +48,7 @@ class Song
   def update(name, album_id)
     @name = name
     @album_id = album_id
-    DB.exec("UPDATE songs SET name = '#{@name}', album_id = #{@album_id} WHERE id = #{@id};")
+    DB.exec("UPDATE songs SET name = '#{@name.gsub("'", "''")}', album_id = #{@album_id} WHERE id = #{@id};")
   end
 
   def delete

@@ -11,12 +11,12 @@ DB = PG.connect({:dbname => "record_store"})
 # Albums--------------------------------->
 
 get('/') do
-  @albums = Album.all
+  @albums = Album.sort()
   erb(:albums)
 end
 
 get('/albums') do
-  @albums = Album.all
+  @albums = Album.sort()
   erb(:albums)
 end
 
@@ -28,7 +28,7 @@ post('/albums') do
   name = params[:album_name]
   album = Album.new({:name => name, :id => nil})
   album.save()
-  @albums = Album.all()
+  @albums = Album.sort()
   erb(:albums)
 end
 
@@ -44,7 +44,7 @@ end
 
 patch('/albums/:id') do
   @album = Album.find(params[:id].to_i())
-  updates = [params[:name]]
+  updates = params[:name]
   @album.update(updates)
   @albums = Album.all
   erb(:albums)

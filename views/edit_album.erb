@@ -1,4 +1,4 @@
-<h1>Update: <%= "#{@album.artist} - #{@album.name}" %></h1>
+<h1>Update: <%= @album.name %></h1>
 
 <form action="/albums/<%= @album.id %>" method="post">
   <input name="_method" type="hidden" value="patch">
