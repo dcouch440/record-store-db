@@ -1,5 +1,6 @@
 # Record Store
-#### *Co-Created By: David Couch, Zachariah Rutledge, Andy Lawson*
+#### *Co-Created By: David Couch, Zachariah Rutledge, Andy Lawson, Jon Stump*
+
 
 ## Description
 This is an application for learning databases with ruby while attending Epicodus coding school. This app Might be un finished and does not represent my class mates or my own coding knowledge.
@@ -17,6 +18,7 @@ This is an application for learning databases with ruby while attending Epicodus
 ## Installation :
 
 * Go to (https://github.com/andyL89/record_store).
+
 * Navigate to the code button on the github website.
 
 * Click on the code button to open the menu.
@@ -99,21 +101,22 @@ rspec
 ## Addition comments:
 * Created on 3/8/21
 
-
 * * *
 
 ## Contact Information
 
-_David Couch: [Email](dcouch440@gmail.com)_
-_Andy Lawson: [Email](alawson89@gmail.com)_
-
-
+_David Couch: [Email](dcouch440@gmail.com)_\
+_Andy Lawson: [Email](alawson89@gmail.com)_\
+_Zack Rutledge: [Email](thorgrim88@gmail.com)_\
+_Jon Stump: [Email](jmstump@gmail.com)_
 
 * * *
 
 ## License
 > [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)\
-> David Couch &copy; 2021
-> Andy Lawson &copy; 2021
+> David Couch &copy; 2021\
+> Andy Lawson &copy; 2021\
+> Zack Rutledge &copy; 2021\
+> Jon Stump &copy; 2021
 
 * * *

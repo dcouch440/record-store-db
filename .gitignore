@@ -1,2 +1,4 @@
 Gemfile.lock
 DATABASE NOTES.txt
+album_db.rb
+/spec/db_test.rb
