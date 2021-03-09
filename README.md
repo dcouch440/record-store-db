@@ -16,7 +16,7 @@ This is an application for learning databases with ruby while attending Epicodus
 
 ## Installation :
 
-* Go to (https://github.com/mekinsie/record-store).
+* Go to (https://github.com/andyL89/record_store).
 * Navigate to the code button on the github website.
 
 * Click on the code button to open the menu.
@@ -30,7 +30,7 @@ This is an application for learning databases with ruby while attending Epicodus
 
 - Once you have chosen your desired directory use the command.
 ```bash
-git clone https://github.com/mekinsie/record-store.git
+git clone https://github.com/andyL89/record_store.git
 ```
 
 <div
